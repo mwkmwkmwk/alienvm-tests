@@ -473,6 +473,7 @@ retf
 
 ; i: al status
 syscall_shutdown:
+push ax
 cli
 mov ax, [ss:0x0800]
 shutdown_flush:
@@ -483,6 +484,7 @@ hlt
 cli
 jmp shutdown_flush
 shutdown_flush_done:
+pop ax
 
 mov dx, 0x900
 out dx, al
@@ -772,12 +774,16 @@ loop cmd_w_cvt_loop
 pop cx
 pop ax
 pop dx
+push dx
+push ax
 xor si, si
 call 0x7b:0
 test ax, ax
 jnz cmd_w_err
 mov bx, cx
 
+pop ax
+pop dx
 pop cx
 add ax, bx
 adc dx, 0
@@ -801,6 +807,8 @@ mov si, 0
 mov [si], byte 10
 mov cx, 1
 call 0x6b:0
+pop ax
+pop dx
 pop cx
 jmp read_cmd
 
@@ -812,6 +820,8 @@ mov cx, str_oob_e-str_oob
 call 0x6b:0
 mov dx, ss
 mov ds, dx
+pop ax
+pop dx
 pop cx
 jmp read_cmd
 
