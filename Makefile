@@ -1,4 +1,4 @@
-all: hello.bin rot13.bin block.bin rc4.bin
+all: hello.bin rot13.bin block.bin rc4.bin sha512.bin
 
 hello.bin: hello.asm
 	nasm -fbin hello.asm -o hello.bin
@@ -12,5 +12,8 @@ block.bin: block.asm
 rc4.bin: rc4.asm
 	nasm -fbin rc4.asm -o rc4.bin
 
+sha512.bin: sha512.asm
+	nasm -fbin sha512.asm -o sha512.bin
+
 clean:
-	rm -f hello.bin rot13.bin block.bin
+	rm -f hello.bin rot13.bin block.bin rc4.bin sha512.bin
