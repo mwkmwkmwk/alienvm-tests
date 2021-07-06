@@ -14,5 +14,3 @@ if p.stderr != b'Hello, world!\n':
 if p.stdout != b'':
     print(f"wrong stdout: {p.stdout}")
     sys.exit(1)
-
-print('ok')
